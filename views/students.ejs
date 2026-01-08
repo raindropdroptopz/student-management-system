@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0
+" />
+<title>Students List</title>
+</head>
+<body>
+<h1>Students</h1>
+<ul>
+<% students.forEach(s => { %>
+<li>
+<strong><%= s.name %></strong>
+— <%= s.major %>
+(id: <%= s.id %>)
+</li>
+<% }) %>
+</ul>
+<hr />
+<p>Try API:</p>
+<ul>
+<li><a href="/students">/students</a></li>
+<li><a href="/students/1">/students/1</a></li>
+</ul>
+</body>
+</html>
