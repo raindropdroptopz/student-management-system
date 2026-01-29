@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Using Sarabun for Thai text support -->
+    <style>
+        body {
+            font-family: 'Outfit', 'Sarabun', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Student Management</h1>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Manage your students efficiently
+                </p>
+            </div>
+            <div class="header-actions">
+                <a href="#" class="btn btn-primary">
+                    <span style="margin-right: 8px;">+</span> Add New Student
+                </a>
+            </div>
+        </header>
+
+        <div class="table-container">
+            <% if (students.length===0) { %>
+                <div class="empty-state">
+                    <div class="empty-icon">📂</div>
+                    <h3>No students found</h3>
+                    <p>Get started by adding a new student to the system.</p>
+                </div>
+                <% } else { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Student ID</th>
+                                <th>Program ID</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% students.forEach(student=> { %>
+                                <tr>
+                                    <td>
+                                        <div class="student-info">
+                                            <div class="avatar">
+                                                <%= student.first_name_th ? student.first_name_th.charAt(0) : '?' %>
+                                            </div>
+                                            <div>
+                                                <div class="student-name">
+                                                    <%= student.first_name_th %>
+                                                        <%= student.last_name_th %>
+                                                </div>
+                                                <span class="student-email">
+                                                    <%= student.email || 'No email' %>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span
+                                            style="font-family: monospace; background: #f1f5f9; padding: 4px 8px; border-radius: 6px; color: #475569;">
+                                            <%= student.student_no %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <%= student.program_id %>
+                                    </td>
+                                    <td style="color: var(--text-muted);">
+                                        <%= student.phone || '-' %>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge status-<%= student.status %>">
+                                            <%= student.status %>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button class="action-btn" title="Edit">✏️</button>
+                                        <button class="action-btn delete-btn" title="Delete">🗑️</button>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                    <% } %>
+        </div>
+
+        <footer>
+            <div>
+                Total Students: <strong>
+                    <%= students.length %>
+                </strong>
+            </div>
+            <div>
+                <a href="/students" style="color: var(--primary); text-decoration: none; margin-right: 15px;">View
+                    All</a>
+                <a href="/" style="color: var(--text-muted); text-decoration: none;">Back to Home</a>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
